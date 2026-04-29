@@ -1,728 +1,381 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Wedding Music Selection</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sea of Love Film — Welcome Guide</title>
 <style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-  body {
-    font-family: 'BDGrotesk', 'BD Grotesk', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    background: #f5f5f7;
-    color: #111111;
-    min-height: 100vh;
-    padding: 3rem 1.5rem 5rem;
-    -webkit-font-smoothing: antialiased;
-  }
+body {
+  font-family: 'BDGrotesk', 'BD Grotesk', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  background: #f5f5f7;
+  color: #111111;
+  -webkit-font-smoothing: antialiased;
+  padding: 3rem 1.5rem 5rem;
+}
 
-  .portal { max-width: 680px; margin: 0 auto; }
+.portal { max-width: 680px; margin: 0 auto; }
 
-  /* Progress bar */
-  .progress-bar {
-    display: flex;
-    overflow: hidden;
-    border-radius: 999px;
-    background: #e8e8ed;
-    margin-bottom: 2.5rem;
-    padding: 4px;
-    gap: 2px;
-  }
-  .progress-step {
-    flex: 1;
-    padding: 8px 6px;
-    font-size: 11px;
-    text-align: center;
-    cursor: pointer;
-    border-radius: 999px;
-    color: #888;
-    background: transparent;
-    transition: all 0.2s;
-    line-height: 1.3;
-    letter-spacing: 0.03em;
-    border: none;
-  }
-  .progress-step.active { background: #111111; color: #ffffff; font-weight: 500; }
-  .progress-step.done { background: #ffffff; color: #111111; }
+/* Progress bar */
+.progress-bar {
+  display: flex;
+  overflow: hidden;
+  border-radius: 999px;
+  background: #e8e8ed;
+  margin-bottom: 2.5rem;
+  padding: 4px;
+  gap: 2px;
+}
+.progress-step {
+  flex: 1;
+  padding: 8px 6px;
+  font-size: 11px;
+  text-align: center;
+  cursor: pointer;
+  border-radius: 999px;
+  color: #888;
+  background: transparent;
+  transition: all 0.2s;
+  line-height: 1.3;
+  letter-spacing: 0.03em;
+  border: none;
+  font-family: inherit;
+}
+.progress-step.active { background: #111111; color: #ffffff; font-weight: 500; }
+.progress-step.done { background: #ffffff; color: #111111; }
 
-  /* Screens */
-  .screen { display: none; }
-  .screen.visible { display: block; animation: fadeIn 0.3s ease; }
-  @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+/* Screens */
+.screen { display: none; }
+.screen.visible { display: block; animation: fadeIn 0.3s ease; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
 
-  /* Typography */
-  .section-label {
-    font-size: 11px;
-    font-weight: 500;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: #999;
-    margin-bottom: 0.75rem;
-  }
-  h2 { font-size: 34px; font-weight: 400; color: #111111; margin-bottom: 0.6rem; line-height: 1.15; letter-spacing: -0.02em; }
-  h3 { font-size: 17px; font-weight: 500; color: #111111; margin-bottom: 0.5rem; }
-  p { font-size: 15px; color: #555; line-height: 1.7; margin-bottom: 1rem; }
+/* Typography */
+.section-label {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #999;
+  margin-bottom: 0.75rem;
+  display: block;
+}
+h2 {
+  font-size: 34px;
+  font-weight: 400;
+  color: #111;
+  margin-bottom: 0.6rem;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+}
+p {
+  font-size: 15px;
+  color: #555;
+  line-height: 1.75;
+  margin-bottom: 1rem;
+}
+p:last-of-type { margin-bottom: 0; }
 
-  /* Alert box */
-  .alert-box {
-    background: #ffffff;
-    border: none;
-    border-radius: 18px;
-    padding: 1.25rem 1.5rem;
-    margin-bottom: 1.5rem;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
-  }
-  .alert-box .alert-title { font-size: 14px; font-weight: 500; color: #111111; margin-bottom: 4px; }
-  .alert-box .alert-body { font-size: 14px; color: #555; line-height: 1.6; }
+/* Cards */
+.card {
+  background: #ffffff;
+  border-radius: 24px;
+  padding: 2.5rem;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.06);
+  margin-bottom: 1rem;
+}
+.card h3 {
+  font-size: 17px;
+  font-weight: 500;
+  color: #111;
+  margin-bottom: 6px;
+}
+.card p { font-size: 15px; color: #555; line-height: 1.75; margin-bottom: 0; }
 
-  /* Reason grid */
-  .reason-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 1.5rem; }
-  .reason-card {
-    background: #ffffff;
-    border: none;
-    border-radius: 18px;
-    padding: 1.25rem 1.5rem;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
-    transition: transform 0.2s, box-shadow 0.2s;
-  }
-  .reason-card:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(0,0,0,0.1); }
-  .reason-card h4 { font-size: 14px; font-weight: 500; color: #111111; margin-bottom: 4px; margin-top: 8px; }
-  .reason-card p { font-size: 13px; margin-bottom: 0; line-height: 1.55; }
+.card-dark {
+  background: #ffffff;
+  border-radius: 24px;
+  padding: 2.5rem;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.06);
+  margin-bottom: 1rem;
+}
+.card-dark h2 { color: #111; }
+.card-dark p { color: #555; }
+.card-dark .section-label { color: #999; }
 
-  /* Good / bad columns */
-  .good-bad { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 1.5rem; }
-  .bad-col { background: #fff5f5; border: none; border-radius: 18px; padding: 1.25rem 1.5rem; }
-  .good-col { background: #f5fff9; border: none; border-radius: 18px; padding: 1.25rem 1.5rem; }
-  .bad-col .col-title { font-size: 11px; font-weight: 500; color: #111111; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 0.08em; }
-  .good-col .col-title { font-size: 11px; font-weight: 500; color: #111111; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 0.08em; }
-  .example-item {
-    font-size: 13px;
-    color: #444;
-    padding: 5px 0;
-    border-bottom: 1px solid rgba(0,0,0,0.06);
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-  .example-item:last-child { border-bottom: none; padding-bottom: 0; }
-  .dot-red { width: 6px; height: 6px; border-radius: 50%; background: #111111; flex-shrink: 0; }
-  .dot-green { width: 6px; height: 6px; border-radius: 50%; background: #111111; flex-shrink: 0; }
+/* Step number badge — inline with title */
+.step-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 1.25rem;
+}
+.step-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #f0f0f5;
+  color: #111;
+  font-size: 13px;
+  font-weight: 500;
+  flex-shrink: 0;
+}
+.step-title {
+  font-size: 20px;
+  font-weight: 500;
+  color: #111;
+  letter-spacing: -0.01em;
+}
 
-  /* Platform cards */
-  .platform-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; margin-bottom: 1.5rem; }
-  .platform-card {
-    background: #ffffff;
-    border: none;
-    border-radius: 18px;
-    padding: 1.25rem 1rem;
-    text-align: center;
-    cursor: pointer;
-    transition: transform 0.2s, box-shadow 0.2s;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
-  }
-  .platform-card:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(0,0,0,0.1); }
-  .platform-card.selected { box-shadow: 0 0 0 2px #111111, 0 8px 24px rgba(0,0,0,0.1); transform: translateY(-3px); }
-  .platform-name { font-size: 14px; font-weight: 500; color: #111111; margin-bottom: 4px; }
-  .platform-desc { font-size: 12px; color: #666; line-height: 1.4; }
-  .platform-badge {
-    display: inline-block;
-    font-size: 11px;
-    padding: 2px 10px;
-    border-radius: 999px;
-    margin-bottom: 8px;
-    background: #f0f0f5;
-    color: #666;
-  }
+/* Contact rows */
+.contact-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+  font-size: 15px;
+}
+.contact-row:last-child { border-bottom: none; }
+.contact-tag {
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #aaa;
+  width: 24px;
+  flex-shrink: 0;
+}
+.contact-val {
+  color: #111;
+  text-decoration: none;
+  transition: color 0.15s;
+}
+.contact-val:hover { color: #555; }
 
-  /* Platform browse links */
-  .platform-link {
-    font-size: 12px;
-    color: #111111;
-    text-decoration: none;
-    padding: 5px 12px;
-    border-radius: 999px;
-    border: 1px solid #111111;
-    background: #ffffff;
-    white-space: nowrap;
-    letter-spacing: 0.02em;
-    transition: all 0.15s;
-  }
-  .platform-link:hover { background: #111111; color: #ffffff; }
+/* Buttons */
+.btn-row { display: flex; align-items: center; gap: 10px; margin-top: 2rem; }
+.btn-primary {
+  padding: 13px 28px;
+  background: #111111;
+  color: #ffffff;
+  border: none;
+  border-radius: 999px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: inherit;
+  letter-spacing: 0.03em;
+  text-decoration: none;
+  display: inline-block;
+}
+.btn-primary:hover { background: #333; }
+.btn-secondary {
+  padding: 13px 28px;
+  background: #ffffff;
+  color: #111;
+  border: 1px solid #ddd;
+  border-radius: 999px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: inherit;
+  letter-spacing: 0.03em;
+}
+.btn-secondary:hover { border-color: #111; background: #f5f5f7; }
+.btn-music {
+  display: inline-block;
+  padding: 13px 28px;
+  background: #111;
+  color: #fff;
+  border: none;
+  border-radius: 999px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: inherit;
+  letter-spacing: 0.03em;
+  text-decoration: none;
+  margin-top: 1.5rem;
+}
+.btn-music:hover { background: #333; }
+.btn-calendly {
+  display: inline-block;
+  padding: 13px 28px;
+  background: #111;
+  color: #fff;
+  border: none;
+  border-radius: 999px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: inherit;
+  letter-spacing: 0.03em;
+  text-decoration: none;
+  margin-top: 1.5rem;
+}
+.btn-calendly:hover { background: #333; }
 
-  /* Film cards */
-  .film-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 1.5rem; }
-  .film-card { border-radius: 18px; border: none; overflow: hidden; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
-  .film-card-header { padding: 1.25rem 1.5rem 0.75rem; }
-  .film-card-body { padding: 0.75rem 1.5rem 1.5rem; }
-  .film-label { font-size: 11px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 4px; color: #999; }
-  .film-title { font-size: 17px; font-weight: 500; color: #111111; margin-bottom: 0; }
-  .film-desc { font-size: 13px; color: #555; line-height: 1.55; }
-  .film-card.highlight .film-card-header { background: #f0f0f5; border-bottom: 1px solid rgba(0,0,0,0.06); }
-  .film-card.social .film-card-header { background: #f0f0f5; border-bottom: 1px solid rgba(0,0,0,0.06); }
-
-  /* Moment sections */
-  .moments-wrapper { display: flex; flex-direction: column; gap: 16px; margin-bottom: 1.5rem; }
-  .moment-section { background: #ffffff; border: none; border-radius: 18px; overflow: hidden; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
-  .moment-section-header { padding: 1.25rem 1.5rem 0.75rem; border-bottom: 1px solid rgba(0,0,0,0.06); background: #f0f0f5; }
-  .moment-section-body { padding: 1.5rem; }
-  .moment-section.highlight .moment-section-title { color: #111111; font-size: 15px; font-weight: 500; }
-  .moment-section.highlight .moment-section-sub { font-size: 12px; color: #888; margin-top: 3px; }
-  .moment-section.social .moment-section-title { color: #111111; font-size: 15px; font-weight: 500; }
-  .moment-section.social .moment-section-sub { font-size: 12px; color: #888; margin-top: 3px; }
-
-  /* Song selector */
-  .sel-song-row {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 10px 14px;
-    border-radius: 12px;
-    border: 1px solid #e0e0e0;
-    cursor: pointer;
-    transition: all 0.15s;
-    background: #ffffff;
-  }
-  .sel-song-row:hover { border-color: #111111; background: #fafafa; }
-  .sel-song-row.picked { border: 2px solid #111111; background: #f5f5f7; }
-  .sel-thumb { width: 34px; height: 34px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 14px; flex-shrink: 0; background: #f0f0f5; color: #111111; }
-  .sel-info { flex: 1; min-width: 0; }
-  .sel-title { font-size: 13px; font-weight: 500; color: #111111; }
-  .sel-meta { font-size: 12px; color: #888; }
-  .sel-pick { width: 18px; height: 18px; border-radius: 50%; border: 1.5px solid #ccc; flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
-  .sel-song-row.picked .sel-pick { background: #111111; border-color: #111111; }
-  .sel-song-row.picked .sel-pick::after { content: ''; display: block; width: 6px; height: 6px; border-radius: 50%; background: white; }
-  .no-favs-note { font-size: 13px; color: #aaa; padding: 8px 0; }
-
-  .insta-pill {
-    display: inline-flex;
-    align-items: center;
-    gap: 5px;
-    font-size: 12px;
-    padding: 5px 14px;
-    border-radius: 999px;
-    background: #f0f0f5;
-    color: #555;
-    margin-bottom: 1rem;
-    letter-spacing: 0.03em;
-  }
-
-  /* Form inputs */
-  .input-label { font-size: 13px; font-weight: 500; color: #111111; margin-bottom: 6px; }
-  .input-hint { font-size: 12px; color: #888; margin-top: 5px; }
-  input[type="text"], input[type="date"], textarea {
-    width: 100%;
-    font-size: 14px;
-    padding: 10px 14px;
-    border-radius: 10px;
-    border: 1px solid #e0e0e0;
-    background: #ffffff;
-    color: #111111;
-    outline: none;
-    font-family: inherit;
-    transition: border-color 0.15s, box-shadow 0.15s;
-  }
-  input[type="text"]:focus, input[type="date"]:focus, textarea:focus { border-color: #111111; box-shadow: 0 0 0 3px rgba(0,0,0,0.06); }
-  textarea { resize: vertical; line-height: 1.5; }
-  .social-input-group { display: flex; flex-direction: column; gap: 14px; }
-
-  /* Summary */
-  .summary-box { background: #ffffff; border-radius: 18px; border: none; box-shadow: 0 2px 12px rgba(0,0,0,0.06); padding: 1.5rem; margin-bottom: 1.5rem; }
-  .summary-film-block { margin-bottom: 1.25rem; }
-  .summary-film-block:last-child { margin-bottom: 0; }
-  .summary-film-label { font-size: 11px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 8px; color: #111111; }
-  .summary-film-label.hl { color: #111111; }
-  .summary-film-label.soc { color: #111111; }
-  .summary-row { display: flex; align-items: flex-start; justify-content: space-between; padding: 6px 0; border-bottom: 1px solid rgba(0,0,0,0.06); gap: 12px; }
-  .summary-row:last-child { border-bottom: none; }
-  .summary-label { font-size: 13px; color: #888; flex-shrink: 0; }
-  .summary-val { font-size: 13px; color: #111111; font-weight: 500; text-align: right; }
-  hr.divider { border: none; border-top: 1px solid rgba(0,0,0,0.06); margin: 1rem 0; }
-
-  /* Confirm box */
-  .confirm-box {
-    background: #ffffff;
-    border: none;
-    border-radius: 18px;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
-    padding: 1.75rem;
-    text-align: center;
-    margin-bottom: 1.5rem;
-  }
-  .confirm-box h3 { color: #111111; margin-bottom: 6px; }
-  .confirm-box p { font-size: 14px; color: #555; margin-bottom: 0; }
-  .share-row { display: flex; gap: 8px; margin-top: 1rem; }
-  .share-btn {
-    flex: 1;
-    padding: 13px 12px;
-    font-size: 13px;
-    border: none;
-    border-radius: 999px;
-    background: #f0f0f5;
-    color: #111111;
-    cursor: pointer;
-    text-align: center;
-    transition: all 0.2s;
-    font-family: inherit;
-    letter-spacing: 0.02em;
-  }
-  .share-btn:hover { background: #e0e0e8; }
-  .share-btn.primary { background: #111111; color: #ffffff; }
-  .share-btn.primary:hover { background: #333333; }
-
-  /* Buttons */
-  .btn-primary {
-    padding: 13px 28px;
-    background: #111111;
-    color: #ffffff;
-    border: none;
-    border-radius: 999px;
-    font-size: 14px;
-    font-weight: 400;
-    cursor: pointer;
-    transition: all 0.2s;
-    font-family: inherit;
-    letter-spacing: 0.03em;
-  }
-  .btn-primary:hover { background: #333333; }
-  .btn-secondary {
-    padding: 13px 28px;
-    background: #ffffff;
-    color: #111111;
-    border: 1px solid #ddd;
-    border-radius: 999px;
-    font-size: 14px;
-    cursor: pointer;
-    transition: all 0.2s;
-    font-family: inherit;
-    letter-spacing: 0.03em;
-  }
-  .btn-secondary:hover { border-color: #111111; background: #f5f5f7; }
-  .btn-row { display: flex; align-items: center; gap: 10px; margin-top: 2rem; }
-
-  /* Tip box */
-  .tip-box {
-    background: #ffffff;
-    border-radius: 18px;
-    padding: 1.25rem 1.5rem;
-    margin-bottom: 1.5rem;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
-  }
-  .tip-box .tip-title { font-size: 13px; font-weight: 500; color: #111111; margin-bottom: 4px; }
-  .tip-box .tip-body { font-size: 13px; color: #555; line-height: 1.6; }
-
-  @media (max-width: 520px) {
-    .reason-grid, .good-bad, .film-grid, .platform-grid { grid-template-columns: 1fr; }
-    .progress-step { font-size: 9px; padding: 7px 3px; }
-    h2 { font-size: 26px; }
-  }
+@media (max-width: 520px) {
+  .progress-step { font-size: 9px; padding: 7px 3px; }
+  h2 { font-size: 26px; }
+  .card, .card-dark { padding: 1.75rem; }
+}
 </style>
-
+</head>
+<body>
 <div class="portal">
 
-  <div class="progress-bar" id="progressBar">
-    <div class="progress-step active" onclick="goTo(0)">1. Why it matters</div>
-    <div class="progress-step" onclick="goTo(1)">2. What's allowed</div>
-    <div class="progress-step" onclick="goTo(2)">3. Browse music</div>
-    <div class="progress-step" onclick="goTo(3)">4. Your films</div>
-    <div class="progress-step" onclick="goTo(4)">5. Review</div>
+  <div class="progress-bar">
+    <div class="progress-step active" id="st0" onclick="go(0)">Welcome</div>
+    <div class="progress-step" id="st1" onclick="go(1)">Pre-wedding</div>
+    <div class="progress-step" id="st2" onclick="go(2)">Wedding day</div>
+    <div class="progress-step" id="st3" onclick="go(3)">Post-wedding</div>
+    <div class="progress-step" id="st4" onclick="go(4)">Music</div>
+    <div class="progress-step" id="st5" onclick="go(5)">Revisions</div>
+    <div class="progress-step" id="st6" onclick="go(6)">Contact</div>
   </div>
 
-  <!-- Screen 0: Why it matters -->
-  <div class="screen visible" id="screen0">
-    <div class="section-label">Before we get to the fun stuff</div>
-    <h2>Let's talk about music for your video</h2>
-    <p>We know you already have a Spotify playlist full of songs you love. Here's why we can't just use those tracks in your wedding film, and what we can do instead.</p>
-    <div class="alert-box" style="background:#f9f6ef;">
-      <div class="alert-title">This applies to every wedding videographer, not just us</div>
-      <div class="alert-body">Even if a videographer says they can use any song, they cannot legally do so. Using unlicensed commercial music exposes you and them to copyright strikes, video takedowns, and in serious cases, financial penalties.</div>
-    </div>
-    <div style="background:#ffffff; border-radius:18px; padding:1.25rem 1.5rem; margin-bottom:1.5rem; box-shadow:0 2px 12px rgba(0,0,0,0.06); display:flex; align-items:flex-start; gap:14px;">
-      <div style="font-size:24px; flex-shrink:0;">🎞️</div>
-      <div>
-        <div style="font-size:14px; font-weight:500; color:#111111; margin-bottom:4px;">Licensed music preserves your film</div>
-        <div style="font-size:14px; color:#555; line-height:1.6;">We use licensed music to keep your film sentimental and personal to you as a couple. It also future-proofs it from music trends that may feel dated over time — your film should feel timeless in 20 years, not tied to a chart hit from the week you got married.</div>
-      </div>
-    </div>
-    <div class="reason-grid">
-      <div class="reason-card">
-        <div style="font-size:20px;">🎵</div>
-        <h4>Songs are intellectual property</h4>
-        <p>Artists and labels own their music. Using it commercially, even in a personal video shared online, requires a sync licence.</p>
-      </div>
-      <div class="reason-card">
-        <div style="font-size:20px;">📹</div>
-        <h4>Your video will be taken down</h4>
-        <p>Platforms like YouTube, Instagram and Vimeo automatically detect unlicensed audio and will mute or remove your video.</p>
-      </div>
-      <div class="reason-card">
-        <div style="font-size:20px;">💸</div>
-        <h4>Sync licences are expensive</h4>
-        <p>Licensing a single popular song for video use typically costs $5,000–$25,000+. It's not a simple fee we can add on.</p>
-      </div>
-      <div class="reason-card">
-        <div style="font-size:20px;">✅</div>
-        <h4>Licensed music sounds great</h4>
-        <p>We use curated libraries with thousands of professional tracks across every genre and mood. You will find something you love.</p>
-      </div>
+  <!-- Screen 0: Welcome -->
+  <div class="screen visible" id="sc0">
+    <span class="section-label">Sea of Love Film Co.</span>
+    <h2>Welcome.</h2>
+    <p style="margin-bottom:2rem;">Thank you so much for entrusting us with one of the most important days of your lives. It truly means the world to be chosen to capture your love story, and we can't wait to create something you'll treasure forever.</p>
+    <div class="card">
+      <h3>Your guide to the whole journey</h3>
+      <p style="margin-top:6px;">This guide covers everything from now through to delivery of your films. We've kept it short and easy to read — use the tabs above to jump to any section, or just hit Next to go through in order.</p>
     </div>
     <div class="btn-row">
-      <button class="btn-primary" onclick="goTo(1)">Got it, show me what's allowed →</button>
+      <button class="btn-primary" onclick="go(1)">Let's get started →</button>
     </div>
   </div>
 
-  <!-- Screen 1: What's allowed -->
-  <div class="screen" id="screen1">
-    <div class="section-label">Understanding your options</div>
-    <h2>Commercial music vs licensed music</h2>
-    <p>The difference is simple. Commercial music is made to be sold and streamed. Licensed music is made specifically for use in video, with the rights already cleared.</p>
-    <div class="good-bad">
-      <div class="bad-col">
-        <div class="col-title">Cannot use</div>
-        <div class="example-item"><span class="dot-red"></span>Spotify / Apple Music tracks</div>
-        <div class="example-item"><span class="dot-red"></span>YouTube music you like</div>
-        <div class="example-item"><span class="dot-red"></span>Radio hits, chart songs</div>
-        <div class="example-item"><span class="dot-red"></span>"Free" songs downloaded randomly</div>
-        <div class="example-item"><span class="dot-red"></span>Live band recordings</div>
+  <!-- Screen 1: Pre-wedding -->
+  <div class="screen" id="sc1">
+    <div class="card">
+      <div class="step-header">
+        <div class="step-badge">01</div>
+        <div class="step-title">Pre-wedding</div>
       </div>
-      <div class="good-col">
-        <div class="col-title">Can use</div>
-        <div class="example-item"><span class="dot-green"></span>Artlist licensed tracks</div>
-        <div class="example-item"><span class="dot-green"></span>Musicbed selections</div>
-        <div class="example-item"><span class="dot-green"></span>Epidemic Sound library</div>
-        <div class="example-item"><span class="dot-green"></span>Soundstripe catalogue</div>
-        <div class="example-item"><span class="dot-green"></span>YouTube Audio Library</div>
-      </div>
-    </div>
-    <p style="font-size:14px;">Our subscriptions to these platforms cover the licensing for use in your video. You browse, you choose the vibe, we handle the rest.</p>
-    <div class="section-label" style="margin-top:1.5rem;">Which platforms do we use?</div>
-    <div class="platform-grid">
-      <div class="platform-card selected" onclick="selectPlatform(this)">
-        <div class="platform-badge">Subscription</div>
-        <div class="platform-name">Musicbed</div>
-        <div class="platform-desc">Premium indie artists. Great for couples who want something unique.</div>
-      </div>
-      <div class="platform-card" onclick="selectPlatform(this)">
-        <div class="platform-badge">Subscription</div>
-        <div class="platform-name">Epidemic Sound</div>
-        <div class="platform-desc">Huge catalogue. Every mood, genre, and tempo imaginable.</div>
-      </div>
-      <div class="platform-card" onclick="selectPlatform(this)">
-        <div class="platform-badge">Subscription</div>
-        <div class="platform-name">Artlist</div>
-        <div class="platform-desc">Cinematic, emotional tracks. Great for wedding films.</div>
-      </div>
+      <p>About a month out from your wedding, you'll receive an email from us requesting some important details for the day — your run sheet, supplier contacts, and wedding party information.</p>
+      <p style="margin-top:1rem;">Included in that email is an invitation to book a pre-wedding call with Nathan. In this call we'll walk through the run sheet together, confirm timings, and make sure everything is locked in so we're fully prepared on the day.</p>
+      <p style="margin-top:1rem;">Once that's done — you're all set. Nothing else is needed from you before the day.</p>
     </div>
     <div class="btn-row">
-      <button class="btn-secondary" onclick="goTo(0)">← Back</button>
-      <button class="btn-primary" onclick="goTo(2)">Browse music →</button>
+      <button class="btn-secondary" onclick="go(0)">← Back</button>
+      <button class="btn-primary" onclick="go(2)">Next →</button>
     </div>
   </div>
 
-  <!-- Screen 2: Browse music -->
-  <div class="screen" id="screen2">
-    <div class="section-label">Browse licensed music</div>
-    <h2>Find songs you love</h2>
-    <p>Head to any of the platforms below and browse freely. When you find tracks you like, note down the song name and artist — you'll enter them in the next step. All three platforms let you filter by mood, tempo, and genre.</p>
-
-    <div style="display:flex; flex-direction:column; gap:14px; margin-bottom:1.5rem;">
-
-      <div style="background:#ffffff; border-radius:18px; overflow:hidden; box-shadow:0 2px 12px rgba(0,0,0,0.06); display:flex; align-items:stretch; transition:transform 0.2s, box-shadow 0.2s;" onmouseover="this.style.transform='translateY(-3px)';this.style.boxShadow='0 8px 24px rgba(0,0,0,0.1)'" onmouseout="this.style.transform='';this.style.boxShadow='0 2px 12px rgba(0,0,0,0.06)'">
-        <div style="background:#111111; width:5px; flex-shrink:0; border-radius:18px 0 0 18px;"></div>
-        <div style="padding:1.25rem 1.5rem; flex:1;">
-          <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:8px;">
-            <div style="display:flex; align-items:center; gap:8px;"><img src="https://www.musicbed.com/favicon.ico" width="18" height="18" style="border-radius:4px;" onerror="this.style.display='none'"><div style="font-size:15px; font-weight:500; color:#111111;">Musicbed</div></div>
-            <a href="https://www.musicbed.com/search" target="_blank" rel="noopener" class="platform-link">Browse Musicbed ↗</a>
-          </div>
-          <div style="font-size:13px; color:#555; line-height:1.6; margin-bottom:8px;">Premium indie artists with a more unique, editorial feel. Great if you want something that sounds less like a typical wedding film. Use the Collections section to find curated wedding playlists.</div>
-          <div style="font-size:11px; color:#aaa; letter-spacing:0.05em; text-transform:uppercase;">Best for: indie · unique · editorial · singer-songwriter</div>
-        </div>
+  <!-- Screen 2: Wedding day -->
+  <div class="screen" id="sc2">
+    <div class="card-dark">
+      <div class="step-header">
+        <div class="step-badge">02</div>
+        <div class="step-title">Wedding day</div>
       </div>
-
-      <div style="background:#ffffff; border-radius:18px; overflow:hidden; box-shadow:0 2px 12px rgba(0,0,0,0.06); display:flex; align-items:stretch; transition:transform 0.2s, box-shadow 0.2s;" onmouseover="this.style.transform='translateY(-3px)';this.style.boxShadow='0 8px 24px rgba(0,0,0,0.1)'" onmouseout="this.style.transform='';this.style.boxShadow='0 2px 12px rgba(0,0,0,0.06)'">
-        <div style="background:#111111; width:5px; flex-shrink:0; border-radius:18px 0 0 18px;"></div>
-        <div style="padding:1.25rem 1.5rem; flex:1;">
-          <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:8px;">
-            <div style="display:flex; align-items:center; gap:8px;"><img src="https://www.epidemicsound.com/favicon.ico" width="18" height="18" style="border-radius:4px;" onerror="this.style.display='none'"><div style="font-size:15px; font-weight:500; color:#111111;">Epidemic Sound</div></div>
-            <a href="https://www.epidemicsound.com/music/wedding/" target="_blank" rel="noopener" class="platform-link">Browse Epidemic ↗</a>
-          </div>
-          <div style="font-size:13px; color:#555; line-height:1.6; margin-bottom:8px;">The largest catalogue of the three. Best if you have a very specific vibe in mind — upbeat, pop, orchestral, lo-fi. The wedding section is a great starting point.</div>
-          <div style="font-size:11px; color:#aaa; letter-spacing:0.05em; text-transform:uppercase;">Best for: upbeat · pop · orchestral · wide variety</div>
-        </div>
-      </div>
-
-      <div style="background:#ffffff; border-radius:18px; overflow:hidden; box-shadow:0 2px 12px rgba(0,0,0,0.06); display:flex; align-items:stretch; transition:transform 0.2s, box-shadow 0.2s;" onmouseover="this.style.transform='translateY(-3px)';this.style.boxShadow='0 8px 24px rgba(0,0,0,0.1)'" onmouseout="this.style.transform='';this.style.boxShadow='0 2px 12px rgba(0,0,0,0.06)'">
-        <div style="background:#111111; width:5px; flex-shrink:0; border-radius:18px 0 0 18px;"></div>
-        <div style="padding:1.25rem 1.5rem; flex:1;">
-          <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:8px;">
-            <div style="display:flex; align-items:center; gap:8px;"><img src="https://artlist.io/favicon.ico" width="18" height="18" style="border-radius:4px;" onerror="this.style.display='none'"><div style="font-size:15px; font-weight:500; color:#111111;">Artlist</div></div>
-            <a href="https://artlist.io/music" target="_blank" rel="noopener" class="platform-link">Browse Artlist ↗</a>
-          </div>
-          <div style="font-size:13px; color:#555; line-height:1.6; margin-bottom:8px;">Strong on cinematic, emotional, and acoustic tracks — ideal for highlight films. Filter by mood then sort by popularity to find the most-used wedding tracks.</div>
-          <div style="font-size:11px; color:#aaa; letter-spacing:0.05em; text-transform:uppercase;">Best for: cinematic · emotional · acoustic · folk</div>
-        </div>
-      </div>
-
+      <p>The planning is done. Today is yours — just enjoy every moment of it.</p>
+      <p style="margin-top:1rem;">Our filming approach is entirely candid and natural. We won't put you in awkward situations or ask you to pose. We move quietly through the day capturing real moments as they happen, so you can be fully present without thinking about the camera.</p>
+      <p style="margin-top:1rem;">Trust the process. We'll be there to capture all the magic.</p>
     </div>
-
-    <div class="tip-box">
-      <div class="tip-title">Tip — you don't need an account to browse</div>
-      <div class="tip-body">All three platforms let you preview tracks for free. Just note down any song names and artists you like and add them in the next step.</div>
-    </div>
-
     <div class="btn-row">
-      <button class="btn-secondary" onclick="goTo(1)">← Back</button>
-      <button class="btn-primary" onclick="goTo(3)">I've found some songs →</button>
+      <button class="btn-secondary" onclick="go(1)">← Back</button>
+      <button class="btn-primary" onclick="go(3)">Next →</button>
     </div>
   </div>
 
-  <!-- Screen 3: Your films -->
-  <div class="screen" id="screen3">
-    <div class="section-label">Two films, two different rules</div>
-    <h2>Tell us about your music choices</h2>
-    <p style="margin-bottom:1.5rem;">You're getting two films from us. The music rules are a little different for each, so we've separated them below.</p>
-
-    <div class="film-grid">
-      <div class="film-card highlight">
-        <div class="film-card-header">
-          <div class="film-label">Highlight film</div>
-          <div class="film-title">5 minute film</div>
-        </div>
-        <div class="film-card-body">
-          <p class="film-desc">Cut to one licensed song from our music library. This is the version you'll share everywhere, keep forever, and that plays at full quality on any platform.</p>
-        </div>
+  <!-- Screen 3: Post-wedding -->
+  <div class="screen" id="sc3">
+    <div class="card">
+      <div class="step-header">
+        <div class="step-badge">03</div>
+        <div class="step-title">Post-wedding</div>
       </div>
-      <div class="film-card social">
-        <div class="film-card-header">
-          <div class="film-label">Social film</div>
-          <div class="film-title">Instagram reel</div>
-        </div>
-        <div class="film-card-body">
-          <p class="film-desc">Posted to your personal Instagram using original audio. Because you're posting it yourself to your own account, you can use any song from Instagram's library.</p>
-        </div>
-      </div>
+      <p>Filming is done and your footage is safely backed up. Now we get to work.</p>
+      <p style="margin-top:1rem;">Your social preview will be ready within <strong>14 days</strong> of the wedding. We'd love for you to tag us when you share it — <strong>@seaoflovefilmco</strong>.</p>
+      <p style="margin-top:1rem;">Your full films will be completed within <strong>4–6 weeks</strong> and delivered via a private, permanent download link.</p>
+      <p style="margin-top:1rem; font-size:13px; color:#aaa;">Please make sure you save your video files to a local drive once you receive them.</p>
+      <div style="margin-top:1.5rem; padding-top:1.5rem; border-top:1px solid rgba(0,0,0,0.06); font-size:13px; color:#aaa; line-height:1.6;">Before your pre-wedding meeting, we recommend reviewing your contract and familiarising yourself with your package deliverables — this helps us make the most of our time together and ensures everyone is aligned ahead of the day.</div>
     </div>
-
-    <div class="moments-wrapper">
-      <div class="moment-section highlight">
-        <div class="moment-section-header">
-          <div class="moment-section-title">Highlight film — your song choices</div>
-          <div class="moment-section-sub">Paste a link or just type the song name and artist</div>
-        </div>
-        <div class="moment-section-body">
-          <div class="social-input-group">
-            <div>
-              <div class="input-label">Song link or name</div>
-              <textarea id="highlightSongs" placeholder="Paste a link from Artlist, Musicbed or Epidemic Sound here — or just write the song name and artist e.g. Still Waters by Mara & Co." rows="4" oninput="highlightData.songs=this.value"></textarea>
-              <div class="input-hint">Got a few options? Add them all — one per line. We'll help you narrow it down.</div>
-            </div>
-            <div>
-              <div class="input-label">Vibe or mood you're going for</div>
-              <input type="text" id="highlightMood" placeholder="e.g. Emotional and cinematic, something that builds..." oninput="highlightData.mood=this.value" />
-              <div class="input-hint">Don't worry if you can't describe it exactly — this just helps us point you in the right direction.</div>
-            </div>
-          </div>
-          <p style="font-size:13px; color:#888; margin-top:1rem; margin-bottom:0; line-height:1.6;">Not sure yet? Leave these blank and tick below — we'll choose something based on the feel of your day.</p>
-          <div class="sel-song-row" id="leaveItRow" onclick="toggleLeaveIt()" style="margin-top:1rem;">
-            <div class="sel-thumb" style="background:#f4f4f4; color:#aaa;">?</div>
-            <div class="sel-info">
-              <div class="sel-title">Leave it to us</div>
-              <div class="sel-meta">We'll choose based on the mood and feel of your day</div>
-            </div>
-            <div class="sel-pick" id="leaveItPick"></div>
-          </div>
-        </div>
-      </div>
-
-      <div class="moment-section social">
-        <div class="moment-section-header">
-          <div class="moment-section-title">Social film — your song, your choice</div>
-          <div class="moment-section-sub">Any song from Instagram's library works here</div>
-        </div>
-        <div class="moment-section-body">
-          <div class="insta-pill">Posted to your personal account via Instagram original audio</div>
-          <p style="font-size:14px; color:#555; line-height:1.6; margin-bottom:1.25rem;">Because you'll be posting this directly to your own Instagram as a reel using original audio, Instagram's licensing covers you. That means you can use any song available in the Instagram audio library, including current chart music.</p>
-          <div class="social-input-group">
-            <div>
-              <div class="input-label">Song name</div>
-              <input type="text" id="socialSong" placeholder="e.g. Lover by Taylor Swift" oninput="socialData.song=this.value" />
-              <div class="input-hint">Search for it in the Instagram audio library first to make sure it's available in your region</div>
-            </div>
-            <div>
-              <div class="input-label">Any notes for us?</div>
-              <textarea id="socialNotes" placeholder="e.g. Start from the chorus, skip the intro..." rows="3" oninput="socialData.notes=this.value"></textarea>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
     <div class="btn-row">
-      <button class="btn-secondary" onclick="goTo(2)">← Back</button>
-      <button class="btn-primary" onclick="goTo(4)">Review my selections →</button>
+      <button class="btn-secondary" onclick="go(2)">← Back</button>
+      <button class="btn-primary" onclick="go(4)">Next →</button>
     </div>
   </div>
 
-  <!-- Screen 4: Review & submit -->
-  <div class="screen" id="screen4">
-    <div class="section-label">Almost done</div>
-    <h2>Your music brief</h2>
-    <p style="margin-bottom:1.5rem;">Before you submit, let us know who this is from so we can match it to your booking.</p>
-
-    <div class="moment-section highlight" style="margin-bottom:1.5rem;">
-      <div class="moment-section-header">
-        <div class="moment-section-title">Your details</div>
-        <div class="moment-section-sub">So we know who this brief is from</div>
+  <!-- Screen 4: Music -->
+  <div class="screen" id="sc4">
+    <div class="card">
+      <div class="step-header">
+        <div class="step-badge">🎵</div>
+        <div class="step-title">Music</div>
       </div>
-      <div class="moment-section-body">
-        <div class="social-input-group">
-          <div>
-            <div class="input-label">Your names</div>
-            <input type="text" id="coupleNames" placeholder="e.g. Sarah & James" oninput="coupleData.names=this.value; buildSummary();" />
-          </div>
-          <div>
-            <div class="input-label">Wedding date</div>
-            <input type="date" id="weddingDate" oninput="coupleData.date=this.value; buildSummary();" style="width:100%; font-size:14px; padding:9px 12px; border-radius:0px; border:1px solid #ddd; background:#ffffff; color:#111111; outline:none; font-family:inherit; transition:border-color 0.15s;" onfocus="this.style.borderColor='#111111'" onblur="this.style.borderColor='#ddd'" />
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="summary-box" id="summaryBox"></div>
-    <div class="confirm-box">
-      <h3>Ready to send this to us?</h3>
-      <p>Once you submit, we'll get a notification and review your music preferences ahead of our next meeting. You can still change things later.</p>
-      <div class="share-row">
-        <button class="share-btn primary" onclick="submitBrief()">Submit to your videographer</button>
-      </div>
+      <p>Music sets the emotional tone of your film and plays a huge role in how it feels when you watch it back in 10, 20, 30 years. That's why we use licensed music — it keeps your video online, sounds timeless, and stays personal to you as a couple long after the trends move on.</p>
+      <p style="margin-top:1rem;">We encourage your input on song direction. We've built a dedicated music guide to walk you through the process, explain what's available, and help you find tracks you genuinely love.</p>
+      <a href="https://music.seaoflovefilm.co" target="_blank" class="btn-music">Select your music →</a>
     </div>
     <div class="btn-row">
-      <button class="btn-secondary" onclick="goTo(3)">← Back</button>
+      <button class="btn-secondary" onclick="go(3)">← Back</button>
+      <button class="btn-primary" onclick="go(5)">Next →</button>
+    </div>
+  </div>
+
+  <!-- Screen 5: Revisions -->
+  <div class="screen" id="sc5">
+    <span class="section-label">Revisions</span>
+    <h2>One round, included.</h2>
+    <div class="card">
+      <p>Every package includes one complimentary round of feedback on your highlight film. Once you've watched it, let us know your thoughts and we'll work with you to make sure it meets your expectations.</p>
+      <p style="margin-top:1rem;">Revisions are provided within the scope of our offering, as outlined in your agreement. We're committed to making sure you love the final result.</p>
+    </div>
+    <div class="btn-row">
+      <button class="btn-secondary" onclick="go(4)">← Back</button>
+      <button class="btn-primary" onclick="go(6)">Next →</button>
+    </div>
+  </div>
+
+  <!-- Screen 6: Contact -->
+  <div class="screen" id="sc6">
+    <span class="section-label">Get in touch</span>
+    <h2>We're here if you need us.</h2>
+    <div class="card" style="margin-bottom:1rem;">
+      <div class="contact-row"><span class="contact-tag">P</span><a href="tel:+61400567603" class="contact-val">+61 400 567 603</a></div>
+      <div class="contact-row"><span class="contact-tag">E</span><a href="mailto:nathan@seaoflovefilm.co" class="contact-val">nathan@seaoflovefilm.co</a></div>
+      <div class="contact-row"><span class="contact-tag">IG</span><a href="https://instagram.com/seaoflovefilmco" target="_blank" class="contact-val">@seaoflovefilmco</a></div>
+      <div class="contact-row"><span class="contact-tag">W</span><a href="https://www.seaoflovefilm.co" target="_blank" class="contact-val">seaoflovefilm.co</a></div>
+    </div>
+    <div class="card" style="margin-bottom:1rem;">
+      <div class="step-header" style="margin-bottom:0.75rem;">
+        <div class="step-badge">📸</div>
+        <div class="step-title">Follow us on Instagram</div>
+      </div>
+      <p>We love sharing the work we create with our couples. Give us a follow at <a href="https://instagram.com/seaoflovefilmco" target="_blank" style="color:#111;font-weight:500;">@seaoflovefilmco</a> — when your films are ready, we'd love to collaborate on a post together and share your story with our community.</p>
+    </div>
+    <div class="card">
+      <p style="margin-bottom:1.25rem;">Have a question or want to talk something through before the day? Book a call directly — we're always happy to chat.</p>
+      <a href="https://calendly.com/nathan-sol/30min" target="_blank" class="btn-music">Book a call →</a>
+    </div>
+    <div class="btn-row">
+      <button class="btn-secondary" onclick="go(5)">← Back</button>
     </div>
   </div>
 
 </div>
 
 <script>
-  let highlightData = { songs: '', mood: '', leaveIt: false };
-  let socialData = { song: '', notes: '' };
-  let coupleData = { names: '', date: '' };
-
-  function goTo(n) {
-    document.querySelectorAll('.screen').forEach(s => s.classList.remove('visible'));
-    document.getElementById('screen' + n).classList.add('visible');
-    document.querySelectorAll('.progress-step').forEach((s, i) => {
-      s.classList.remove('active','done');
-      if (i < n) s.classList.add('done');
-      else if (i === n) s.classList.add('active');
-    });
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-    if (n === 4) buildSummary();
+function go(n) {
+  for(var i=0;i<7;i++){
+    document.getElementById('sc'+i).className='screen'+(i===n?' visible':'');
+    var st=document.getElementById('st'+i);
+    if(i<n) st.className='progress-step done';
+    else if(i===n) st.className='progress-step active';
+    else st.className='progress-step';
   }
-
-  function selectPlatform(el) {
-    document.querySelectorAll('.platform-card').forEach(c => c.classList.remove('selected'));
-    el.classList.add('selected');
-  }
-
-  function toggleLeaveIt() {
-    highlightData.leaveIt = !highlightData.leaveIt;
-    const row = document.getElementById('leaveItRow');
-    const pick = document.getElementById('leaveItPick');
-    row.classList.toggle('picked', highlightData.leaveIt);
-    pick.classList.toggle('picked', highlightData.leaveIt);
-  }
-
-  function buildSummary() {
-    const box = document.getElementById('summaryBox');
-    const namesEl = document.getElementById('coupleNames');
-    const dateEl = document.getElementById('weddingDate');
-    const names = (namesEl && namesEl.value) ? namesEl.value : (coupleData.names || 'Not provided');
-    const rawDate = (dateEl && dateEl.value) ? dateEl.value : coupleData.date;
-    const date = rawDate ? new Date(rawDate).toLocaleDateString('en-AU', { day: 'numeric', month: 'long', year: 'numeric' }) : 'Not provided';
-    const highlightSongs = highlightData.leaveIt ? 'Leave to videographer' : (highlightData.songs || 'Not provided');
-    const highlightMood = highlightData.mood || 'Not provided';
-    const socialSong = socialData.song || 'Not provided yet';
-    const socialNotes = socialData.notes || 'None';
-    box.innerHTML = `
-      <div class="summary-film-block">
-        <div class="summary-film-label" style="color:#111111;">Your details</div>
-        <div class="summary-row"><span class="summary-label">Names</span><span class="summary-val">${names}</span></div>
-        <div class="summary-row"><span class="summary-label">Wedding date</span><span class="summary-val">${date}</span></div>
-      </div>
-      <hr class="divider">
-      <div class="summary-film-block">
-        <div class="summary-film-label hl">Highlight film</div>
-        <div class="summary-row"><span class="summary-label">Song ideas</span><span class="summary-val">${highlightSongs}</span></div>
-        <div class="summary-row"><span class="summary-label">Mood / vibe</span><span class="summary-val">${highlightMood}</span></div>
-      </div>
-      <hr class="divider">
-      <div class="summary-film-block">
-        <div class="summary-film-label soc">Social film</div>
-        <div class="summary-row"><span class="summary-label">Song request</span><span class="summary-val">${socialSong}</span></div>
-        <div class="summary-row"><span class="summary-label">Notes</span><span class="summary-val">${socialNotes}</span></div>
-      </div>
-    `;
-  }
-
-  function getBriefText() {
-    const namesEl = document.getElementById('coupleNames');
-    const dateEl = document.getElementById('weddingDate');
-    const names = (namesEl && namesEl.value) ? namesEl.value : (coupleData.names || 'Not provided');
-    const rawDate = (dateEl && dateEl.value) ? dateEl.value : coupleData.date;
-    const date = rawDate ? new Date(rawDate).toLocaleDateString('en-AU', { day: 'numeric', month: 'long', year: 'numeric' }) : 'Not provided';
-    const highlightSongs = highlightData.leaveIt ? 'Leave to videographer' : (highlightData.songs || 'Not provided');
-    return [
-      'Wedding Music Brief',
-      '',
-      'COUPLE DETAILS',
-      `Names: ${names}`,
-      `Wedding date: ${date}`,
-      '',
-      'HIGHLIGHT FILM',
-      `Song ideas: ${highlightSongs}`,
-      `Mood / vibe: ${highlightData.mood || 'Not provided'}`,
-      '',
-      'SOCIAL FILM',
-      `Song: ${socialData.song || 'Not provided'}`,
-      `Notes: ${socialData.notes || 'None'}`,
-    ].join('\n');
-  }
-
-  function submitBrief() {
-    const FORM_ENDPOINT = 'https://formspree.io/f/xzdylyeb';
-    const namesEl = document.getElementById('coupleNames');
-    const dateEl = document.getElementById('weddingDate');
-    const names = (namesEl && namesEl.value) ? namesEl.value : (coupleData.names || 'Not provided');
-    const rawDate = (dateEl && dateEl.value) ? dateEl.value : coupleData.date;
-    const date = rawDate ? new Date(rawDate).toLocaleDateString('en-AU', { day: 'numeric', month: 'long', year: 'numeric' }) : 'Not provided';
-    const highlightSongs = highlightData.leaveIt ? 'Leave to videographer' : (highlightData.songs || 'Not provided');
-
-    const payload = {
-      couple_names: names,
-      wedding_date: date,
-      highlight_songs: highlightSongs,
-      highlight_mood: highlightData.mood || 'Not provided',
-      social_song: socialData.song || 'Not provided',
-      social_notes: socialData.notes || 'None',
-    };
-
-    if (FORM_ENDPOINT === 'YOUR_FORM_ENDPOINT_HERE') {
-      alert('Brief ready to send! Connect a form endpoint (e.g. Formspree) to enable email delivery.\n\n' + getBriefText());
-      return;
-    }
-
-    fetch(FORM_ENDPOINT, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(payload)
-    }).then(() => {
-      document.querySelector('.confirm-box').innerHTML = `
-        <h3>Brief sent!</h3>
-        <p>We've received your music selections and will be in touch before your next call.</p>
-      `;
-    }).catch(() => {
-      alert('Something went wrong. Please email us your brief directly.');
-    });
-  }
+  window.scrollTo({top:0,behavior:'smooth'});
+}
 </script>
+</body>
 </html>
