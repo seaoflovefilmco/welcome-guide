@@ -103,6 +103,26 @@ p:last-of-type { margin-bottom: 0; }
 .card-dark p { color: #555; }
 .card-dark .section-label { color: #999; }
 
+/* Photo + card combo */
+.photo-card-group {
+  margin-bottom: 1rem;
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.06);
+}
+.photo-card-group .welcome-photo {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  object-position: center 20%;
+  display: block;
+}
+.photo-card-group .card {
+  border-radius: 0;
+  box-shadow: none;
+  margin-bottom: 0;
+}
+
 /* Step number badge — inline with title */
 .step-header {
   display: flex;
@@ -243,11 +263,20 @@ p:last-of-type { margin-bottom: 0; }
   <div class="screen visible" id="sc0">
     <span class="section-label">Sea of Love Film Co.</span>
     <h2>Welcome.</h2>
-    <p style="margin-bottom:2rem;">Thank you so much for entrusting us with one of the most important days of your lives. It truly means the world to be chosen to capture your love story, and we can't wait to create something you'll treasure forever.</p>
-    <div class="card">
-      <h3>Your guide to the whole journey</h3>
-      <p style="margin-top:6px;">This guide covers everything from now through to delivery of your films. We've kept it short and easy to read — use the tabs above to jump to any section, or just hit Next to go through in order.</p>
+    <p style="margin-bottom:2rem;">Thank you so much for entrusting us with one of the most important days of your lives. It truly means the world to be chosen to capture your love story, and we can't wait to create something you'll treasure forever.<br><br>— Nathan</p>
+
+    <div class="photo-card-group">
+      <img
+        src="https://cdn.prod.website-files.com/6892f14783b23ff3c9e58a21/68940b8081dee0c35fe7a846_nf.jpg"
+        alt="Nathan, Sea of Love Film Co."
+        class="welcome-photo"
+      />
+      <div class="card">
+        <h3>Your guide to the whole journey</h3>
+        <p style="margin-top:6px;">This guide covers everything from now through to delivery of your films. We've kept it short and easy to read — use the tabs above to jump to any section, or just hit Next to go through in order.</p>
+      </div>
     </div>
+
     <div class="btn-row">
       <button class="btn-primary" onclick="go(1)">Let's get started →</button>
     </div>
