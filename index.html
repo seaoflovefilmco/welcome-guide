@@ -3,408 +3,639 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sea of Love Film — Welcome Guide</title>
+<meta name="description" content="The Sea of Love welcome guide for booked couples — pre-wedding, the day, post-wedding, music, revisions, and contact.">
+<title>Sea of Love — Welcome Guide</title>
+
+<!--
+  Design system aligned to the main Sea of Love site (Astro project).
+  Cormorant Garamond stands in for the main site's Season Mix serif —
+  Season Mix is a paid foundry font that can't ship in this static
+  GitHub Pages repo. Cormorant is the closest free alternative and
+  was the legacy fallback before Season Mix replaced it. DM Sans
+  matches the main site's body/UI sans exactly.
+-->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=DM+Sans:wght@400;500&display=swap">
+
 <style>
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  /* ============================================================
+     Design tokens — ported from the main site's global.css.
+     Where Season Mix is used on the main site, Cormorant Garamond
+     stands in here (see comment in <head>).
+     ============================================================ */
+  :root {
+    --black:        #0a0a0a;
+    --white:        #fafaf8;   /* warm — not pure white */
+    --mid:          #888880;   /* warm mid grey */
+    --bg-tonal:     #f4f4f2;
+    --fg-prose:     #444;
+    --fg-muted:     #666;
 
-body {
-  font-family: 'BDGrotesk', 'BD Grotesk', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  background: #f5f5f7;
-  color: #111111;
-  -webkit-font-smoothing: antialiased;
-  padding: 3rem 1.5rem 5rem;
-}
+    --border:       rgba(0, 0, 0, 0.07);
+    --rule:         rgba(0, 0, 0, 0.08);
+    --rule-strong:  rgba(0, 0, 0, 0.15);
 
-.portal { max-width: 680px; margin: 0 auto; }
+    --serif: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
+    --sans:  'DM Sans', system-ui, -apple-system, sans-serif;
 
-/* Progress bar */
-.progress-bar {
-  display: flex;
-  overflow: hidden;
-  border-radius: 999px;
-  background: #e8e8ed;
-  margin-bottom: 2.5rem;
-  padding: 4px;
-  gap: 2px;
-}
-.progress-step {
-  flex: 1;
-  padding: 8px 6px;
-  font-size: 11px;
-  text-align: center;
-  cursor: pointer;
-  border-radius: 999px;
-  color: #888;
-  background: transparent;
-  transition: all 0.2s;
-  line-height: 1.3;
-  letter-spacing: 0.03em;
-  border: none;
-  font-family: inherit;
-}
-.progress-step.active { background: #111111; color: #ffffff; font-weight: 500; }
-.progress-step.done { background: #ffffff; color: #111111; }
+    --tracking-tight:        -0.02em;
+    --tracking-snug:         -0.015em;
+    --tracking-soft:          0.02em;
+    --tracking-eyebrow:       0.16em;
+    --tracking-eyebrow-wide:  0.18em;
 
-/* Screens */
-.screen { display: none; }
-.screen.visible { display: block; animation: fadeIn 0.3s ease; }
-@keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+    --duration-fast:   0.2s;
+    --duration-base:   0.3s;
+    --duration-medium: 0.4s;
+    --ease:            ease;
+    --ease-cinematic:  cubic-bezier(0.16, 1, 0.3, 1);
+  }
 
-/* Typography */
-.section-label {
-  font-size: 11px;
-  font-weight: 500;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: #999;
-  margin-bottom: 0.75rem;
-  display: block;
-}
-h2 {
-  font-size: 34px;
-  font-weight: 400;
-  color: #111;
-  margin-bottom: 0.6rem;
-  line-height: 1.15;
-  letter-spacing: -0.02em;
-}
-p {
-  font-size: 15px;
-  color: #555;
-  line-height: 1.75;
-  margin-bottom: 1rem;
-}
-p:last-of-type { margin-bottom: 0; }
+  /* ============================================================
+     Reset
+     ============================================================ */
+  *, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
 
-/* Cards */
-.card {
-  background: #ffffff;
-  border-radius: 24px;
-  padding: 2.5rem;
-  box-shadow: 0 2px 16px rgba(0,0,0,0.06);
-  margin-bottom: 1rem;
-}
-.card h3 {
-  font-size: 17px;
-  font-weight: 500;
-  color: #111;
-  margin-bottom: 6px;
-}
-.card p { font-size: 15px; color: #555; line-height: 1.75; margin-bottom: 0; }
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
 
-.card-dark {
-  background: #ffffff;
-  border-radius: 24px;
-  padding: 2.5rem;
-  box-shadow: 0 2px 16px rgba(0,0,0,0.06);
-  margin-bottom: 1rem;
-}
-.card-dark h2 { color: #111; }
-.card-dark p { color: #555; }
-.card-dark .section-label { color: #999; }
+  body {
+    font-family: var(--serif);
+    font-size: 17px;
+    font-weight: 400;
+    line-height: 1.7;
+    color: var(--black);
+    background: var(--white);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    padding: 4rem 1.5rem 6rem;
+  }
 
-/* Photo + card combo */
-.photo-card-group {
-  margin-bottom: 1rem;
-  border-radius: 24px;
-  overflow: hidden;
-  box-shadow: 0 2px 16px rgba(0,0,0,0.06);
-}
-.photo-card-group .welcome-photo {
-  width: 100%;
-  aspect-ratio: 16 / 9;
-  object-fit: cover;
-  object-position: center 20%;
-  display: block;
-}
-.photo-card-group .card {
-  border-radius: 0;
-  box-shadow: none;
-  margin-bottom: 0;
-}
+  .portal {
+    max-width: 720px;
+    margin: 0 auto;
+  }
 
-/* Step number badge — inline with title */
-.step-header {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin-bottom: 1.25rem;
-}
-.step-badge {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  background: #f0f0f5;
-  color: #111;
-  font-size: 13px;
-  font-weight: 500;
-  flex-shrink: 0;
-}
-.step-title {
-  font-size: 20px;
-  font-weight: 500;
-  color: #111;
-  letter-spacing: -0.01em;
-}
+  /* ============================================================
+     Progress bar — minimal underline-tab pattern.
+     A flat row of uppercase-tracked sans labels with a hairline
+     rule below. The active step gets a 1px solid underline
+     overlapping the rule; visited steps just darken in colour.
+     Mirrors the main site's editorial register; no pill pills.
+     ============================================================ */
+  .progress-bar {
+    display: flex;
+    margin: 0 0 4rem;
+    border-bottom: 1px solid var(--rule);
+    overflow-x: auto;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+  .progress-bar::-webkit-scrollbar {
+    display: none;
+  }
+  .progress-step {
+    flex: 1 0 auto;
+    padding: 14px 12px;
+    border: none;
+    border-bottom: 1px solid transparent;
+    margin-bottom: -1px;
+    background: transparent;
+    color: var(--mid);
+    font-family: var(--sans);
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: var(--tracking-eyebrow);
+    text-transform: uppercase;
+    cursor: pointer;
+    white-space: nowrap;
+    transition:
+      color var(--duration-fast) var(--ease),
+      border-color var(--duration-fast) var(--ease);
+  }
+  .progress-step:hover {
+    color: var(--black);
+  }
+  .progress-step.active {
+    color: var(--black);
+    border-bottom-color: var(--black);
+  }
+  .progress-step.done {
+    color: var(--black);
+  }
 
-/* Contact rows */
-.contact-row {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  padding: 10px 0;
-  border-bottom: 1px solid rgba(0,0,0,0.06);
-  font-size: 15px;
-}
-.contact-row:last-child { border-bottom: none; }
-.contact-tag {
-  font-size: 10px;
-  font-weight: 500;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: #aaa;
-  width: 24px;
-  flex-shrink: 0;
-}
-.contact-val {
-  color: #111;
-  text-decoration: none;
-  transition: color 0.15s;
-}
-.contact-val:hover { color: #555; }
+  /* ============================================================
+     Screens
+     ============================================================ */
+  .screen {
+    display: none;
+  }
+  .screen.visible {
+    display: block;
+    animation: fadeIn 0.4s var(--ease-cinematic);
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
 
-/* Buttons */
-.btn-row { display: flex; align-items: center; gap: 10px; margin-top: 2rem; }
-.btn-primary {
-  padding: 13px 28px;
-  background: #111111;
-  color: #ffffff;
-  border: none;
-  border-radius: 999px;
-  font-size: 14px;
-  cursor: pointer;
-  transition: all 0.2s;
-  font-family: inherit;
-  letter-spacing: 0.03em;
-  text-decoration: none;
-  display: inline-block;
-}
-.btn-primary:hover { background: #333; }
-.btn-secondary {
-  padding: 13px 28px;
-  background: #ffffff;
-  color: #111;
-  border: 1px solid #ddd;
-  border-radius: 999px;
-  font-size: 14px;
-  cursor: pointer;
-  transition: all 0.2s;
-  font-family: inherit;
-  letter-spacing: 0.03em;
-}
-.btn-secondary:hover { border-color: #111; background: #f5f5f7; }
-.btn-music {
-  display: inline-block;
-  padding: 13px 28px;
-  background: #111;
-  color: #fff;
-  border: none;
-  border-radius: 999px;
-  font-size: 14px;
-  cursor: pointer;
-  transition: all 0.2s;
-  font-family: inherit;
-  letter-spacing: 0.03em;
-  text-decoration: none;
-  margin-top: 1.5rem;
-}
-.btn-music:hover { background: #333; }
-.btn-calendly {
-  display: inline-block;
-  padding: 13px 28px;
-  background: #111;
-  color: #fff;
-  border: none;
-  border-radius: 999px;
-  font-size: 14px;
-  cursor: pointer;
-  transition: all 0.2s;
-  font-family: inherit;
-  letter-spacing: 0.03em;
-  text-decoration: none;
-  margin-top: 1.5rem;
-}
-.btn-calendly:hover { background: #333; }
+  /* ============================================================
+     Eyebrow — small uppercase tracked sans
+     ============================================================ */
+  .eyebrow {
+    display: block;
+    margin-bottom: 1rem;
+    font-family: var(--sans);
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: var(--tracking-eyebrow-wide);
+    text-transform: uppercase;
+    color: var(--mid);
+  }
 
-@media (max-width: 520px) {
-  .progress-step { font-size: 9px; padding: 7px 3px; }
-  h2 { font-size: 26px; }
-  .card, .card-dark { padding: 1.75rem; }
-}
+  /* ============================================================
+     Headings — editorial serif
+     Welcome screen uses h1; subsequent screens use h2.
+     ============================================================ */
+  h1, h2 {
+    font-family: var(--serif);
+    font-weight: 400;
+    line-height: 1.05;
+    color: var(--black);
+  }
+  h1 {
+    margin: 0 0 1.5rem;
+    font-size: clamp(44px, 6vw, 76px);
+    letter-spacing: var(--tracking-tight);
+  }
+  h2.screen-heading {
+    margin: 0 0 1.5rem;
+    font-size: clamp(32px, 4vw, 52px);
+    letter-spacing: var(--tracking-snug);
+  }
+  h1 em, h2 em {
+    font-style: italic;
+  }
+
+  /* ============================================================
+     Step header — italic serif numeral + title
+     Echoes the about page's numbered principles pattern at a
+     slightly smaller scale.
+     ============================================================ */
+  .step-header {
+    display: flex;
+    align-items: baseline;
+    gap: 1.25rem;
+    margin: 0 0 2rem;
+  }
+  .step-num {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: clamp(40px, 4.5vw, 64px);
+    font-weight: 400;
+    line-height: 0.9;
+    letter-spacing: var(--tracking-tight);
+    color: var(--black);
+  }
+  .step-title {
+    margin: 0;
+    font-family: var(--serif);
+    font-size: clamp(28px, 3vw, 40px);
+    font-weight: 400;
+    line-height: 1.1;
+    letter-spacing: var(--tracking-snug);
+    color: var(--black);
+  }
+
+  /* ============================================================
+     Body prose
+     ============================================================ */
+  .screen p {
+    margin: 0 0 1.25rem;
+    font-family: var(--serif);
+    font-size: 17px;
+    font-weight: 400;
+    line-height: 1.7;
+    color: var(--fg-prose);
+  }
+  .screen p:last-of-type {
+    margin-bottom: 0;
+  }
+  .screen p strong {
+    font-weight: 500;
+    color: var(--black);
+  }
+  .screen p a {
+    color: var(--black);
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.2em;
+    transition: opacity var(--duration-fast) var(--ease);
+  }
+  .screen p a:hover {
+    opacity: 0.7;
+  }
+
+  /* Sign-off line ("— Nathan") */
+  .signoff {
+    margin-top: 1.5rem !important;
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 17px;
+    color: var(--black);
+  }
+
+  /* ============================================================
+     Welcome screen — photo + sub-heading treatment
+     The portrait sits between the opening paragraphs and the
+     "Your guide to the whole journey" callout. No card chrome;
+     just the image, a hairline of breathing room, and an
+     italic-serif sub heading.
+     ============================================================ */
+  .welcome-photo {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    object-position: center 20%;
+    display: block;
+    margin: 3rem 0 2rem;
+    background: #e0e0de;
+  }
+  .welcome-sub {
+    margin: 2rem 0 0.75rem !important;
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: clamp(20px, 2.2vw, 26px);
+    font-weight: 400;
+    line-height: 1.3;
+    color: var(--black);
+  }
+
+  /* ============================================================
+     Note (small grey reminder text below a hairline)
+     ============================================================ */
+  .note {
+    margin-top: 2.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--rule);
+    font-family: var(--sans);
+    font-size: 13px;
+    line-height: 1.6;
+    color: var(--mid);
+  }
+
+  /* ============================================================
+     Contact rows — role tag + value, hairline between rows
+     ============================================================ */
+  .contact-rows {
+    margin: 2.5rem 0;
+    padding-top: 0.5rem;
+  }
+  .contact-row {
+    display: flex;
+    align-items: baseline;
+    gap: 1.25rem;
+    padding: 1rem 0;
+    border-top: 1px solid var(--rule);
+  }
+  .contact-row:last-child {
+    border-bottom: 1px solid var(--rule);
+  }
+  .contact-tag {
+    flex: 0 0 32px;
+    font-family: var(--sans);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: var(--tracking-eyebrow);
+    text-transform: uppercase;
+    color: var(--mid);
+  }
+  .contact-val {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 18px;
+    color: var(--black);
+    text-decoration: none;
+    transition: opacity var(--duration-fast) var(--ease);
+  }
+  .contact-val:hover {
+    opacity: 0.7;
+  }
+
+  /* ============================================================
+     Sub-section within a screen (Instagram callout, Calendly CTA)
+     Hairline above + breathing room separates internal sections
+     within a single screen.
+     ============================================================ */
+  .subsection {
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--rule);
+  }
+  .subsection .eyebrow {
+    margin-bottom: 0.75rem;
+  }
+  .subsection-heading {
+    margin: 0 0 1rem;
+    font-family: var(--serif);
+    font-size: clamp(22px, 2.4vw, 30px);
+    font-weight: 400;
+    line-height: 1.2;
+    letter-spacing: var(--tracking-snug);
+    color: var(--black);
+  }
+
+  /* ============================================================
+     Buttons — pill, dark-fill primary + outlined secondary
+     Mirrors the main site's CheckAvailability + filter-pill
+     button styles.
+     ============================================================ */
+  .btn-row {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 3rem;
+    padding-top: 1.75rem;
+    border-top: 1px solid var(--rule);
+  }
+  .btn-primary,
+  .btn-secondary,
+  .btn-inline {
+    display: inline-block;
+    padding: 13px 30px;
+    border-radius: 999px;
+    font-family: var(--sans);
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: var(--tracking-soft);
+    text-decoration: none;
+    cursor: pointer;
+    transition:
+      background var(--duration-fast) var(--ease),
+      border-color var(--duration-fast) var(--ease),
+      color var(--duration-fast) var(--ease);
+  }
+  .btn-primary,
+  .btn-inline {
+    background: var(--black);
+    color: var(--white);
+    border: 1px solid var(--black);
+  }
+  .btn-primary:hover,
+  .btn-inline:hover {
+    background: #222;
+    border-color: #222;
+  }
+  .btn-secondary {
+    background: transparent;
+    color: var(--black);
+    border: 1px solid rgba(0, 0, 0, 0.18);
+  }
+  .btn-secondary:hover {
+    border-color: var(--black);
+  }
+  .btn-inline {
+    margin-top: 1.75rem;
+  }
+
+  /* ============================================================
+     Mobile
+     ============================================================ */
+  @media (max-width: 600px) {
+    body {
+      padding: 2.5rem 1.25rem 4rem;
+    }
+    .progress-bar {
+      margin-bottom: 2.5rem;
+    }
+    .progress-step {
+      font-size: 10px;
+      padding: 11px 8px;
+      letter-spacing: 0.12em;
+    }
+    .step-header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.25rem;
+    }
+    .step-num {
+      font-size: 36px;
+    }
+    .step-title {
+      font-size: 26px;
+    }
+    h1 {
+      font-size: clamp(38px, 10vw, 52px);
+    }
+    h2.screen-heading {
+      font-size: clamp(28px, 8vw, 38px);
+    }
+    .welcome-photo {
+      margin-top: 2.25rem;
+    }
+    .contact-row {
+      gap: 1rem;
+    }
+    .btn-row {
+      gap: 0.5rem;
+    }
+    .btn-primary,
+    .btn-secondary,
+    .btn-inline {
+      padding: 12px 22px;
+      font-size: 13px;
+    }
+  }
 </style>
 </head>
 <body>
 <div class="portal">
 
-  <div class="progress-bar">
-    <div class="progress-step active" id="st0" onclick="go(0)">Welcome</div>
-    <div class="progress-step" id="st1" onclick="go(1)">Pre-wedding</div>
-    <div class="progress-step" id="st2" onclick="go(2)">Wedding day</div>
-    <div class="progress-step" id="st3" onclick="go(3)">Post-wedding</div>
-    <div class="progress-step" id="st4" onclick="go(4)">Music</div>
-    <div class="progress-step" id="st5" onclick="go(5)">Revisions</div>
-    <div class="progress-step" id="st6" onclick="go(6)">Contact</div>
+  <!-- Progress bar — clickable steps + Next/Back navigation -->
+  <div class="progress-bar" role="navigation" aria-label="Welcome guide steps">
+    <button type="button" class="progress-step active" id="st0" onclick="go(0)" aria-current="page">Welcome</button>
+    <button type="button" class="progress-step" id="st1" onclick="go(1)">Pre-wedding</button>
+    <button type="button" class="progress-step" id="st2" onclick="go(2)">Wedding day</button>
+    <button type="button" class="progress-step" id="st3" onclick="go(3)">Post-wedding</button>
+    <button type="button" class="progress-step" id="st4" onclick="go(4)">Music</button>
+    <button type="button" class="progress-step" id="st5" onclick="go(5)">Revisions</button>
+    <button type="button" class="progress-step" id="st6" onclick="go(6)">Contact</button>
   </div>
 
   <!-- Screen 0: Welcome -->
-  <div class="screen visible" id="sc0">
-    <span class="section-label">Sea of Love Film Co.</span>
-    <h2>Welcome.</h2>
-    <p style="margin-bottom:2rem;">Thank you so much for entrusting us with one of the most important days of your lives. It truly means the world to be chosen to capture your love story, and we can't wait to create something you'll treasure forever.<br><br>— Nathan</p>
+  <section class="screen visible" id="sc0">
+    <span class="eyebrow">Sea of Love</span>
+    <h1>Welcome.</h1>
+    <p>Thank you so much for entrusting us with one of the most important days of your lives. It truly means the world to be chosen to capture your love story, and we can't wait to create something you'll treasure forever.</p>
+    <p class="signoff">— Nathan</p>
 
-    <div class="photo-card-group">
-      <img
-        src="https://cdn.prod.website-files.com/6892f14783b23ff3c9e58a21/68940b8081dee0c35fe7a846_nf.jpg"
-        alt="Nathan, Sea of Love Film Co."
-        class="welcome-photo"
-      />
-      <div class="card">
-        <h3>Your guide to the whole journey</h3>
-        <p style="margin-top:6px;">This guide covers everything from now through to delivery of your films. We've kept it short and easy to read — use the tabs above to jump to any section, or just hit Next to go through in order.</p>
-      </div>
-    </div>
+    <img
+      class="welcome-photo"
+      src="https://cdn.prod.website-files.com/6892f14783b23ff3c9e58a21/68940b8081dee0c35fe7a846_nf.jpg"
+      alt="Nathan, Sea of Love"
+    />
+
+    <p class="welcome-sub">Your guide to the whole journey.</p>
+    <p>This guide covers everything from now through to delivery of your films. We've kept it short and easy to read — use the tabs above to jump to any section, or just hit Next to go through in order.</p>
 
     <div class="btn-row">
-      <button class="btn-primary" onclick="go(1)">Let's get started →</button>
+      <button type="button" class="btn-primary" onclick="go(1)">Let's get started →</button>
     </div>
-  </div>
+  </section>
 
   <!-- Screen 1: Pre-wedding -->
-  <div class="screen" id="sc1">
-    <div class="card">
-      <div class="step-header">
-        <div class="step-badge">01</div>
-        <div class="step-title">Pre-wedding</div>
-      </div>
-      <p>About a month out from your wedding, you'll receive an email from us requesting some important details for the day — your run sheet, supplier contacts, and wedding party information.</p>
-      <p style="margin-top:1rem;">Included in that email is an invitation to book a pre-wedding call with Nathan. In this call we'll walk through the run sheet together, confirm timings, and make sure everything is locked in so we're fully prepared on the day.</p>
-      <p style="margin-top:1rem;">Once that's done — you're all set. Nothing else is needed from you before the day.</p>
-    </div>
+  <section class="screen" id="sc1">
+    <header class="step-header">
+      <span class="step-num">01</span>
+      <h2 class="step-title">Pre-wedding</h2>
+    </header>
+    <p>About a month out from your wedding, you'll receive an email from us requesting some important details for the day — your run sheet, supplier contacts, and wedding party information.</p>
+    <p>Included in that email is an invitation to book a pre-wedding call with Nathan. In this call we'll walk through the run sheet together, confirm timings, and make sure everything is locked in so we're fully prepared on the day.</p>
+    <p>Once that's done — you're all set. Nothing else is needed from you before the day.</p>
     <div class="btn-row">
-      <button class="btn-secondary" onclick="go(0)">← Back</button>
-      <button class="btn-primary" onclick="go(2)">Next →</button>
+      <button type="button" class="btn-secondary" onclick="go(0)">← Back</button>
+      <button type="button" class="btn-primary" onclick="go(2)">Next →</button>
     </div>
-  </div>
+  </section>
 
   <!-- Screen 2: Wedding day -->
-  <div class="screen" id="sc2">
-    <div class="card-dark">
-      <div class="step-header">
-        <div class="step-badge">02</div>
-        <div class="step-title">Wedding day</div>
-      </div>
-      <p>The planning is done. Today is yours — just enjoy every moment of it.</p>
-      <p style="margin-top:1rem;">Our filming approach is entirely candid and natural. We won't put you in awkward situations or ask you to pose. We move quietly through the day capturing real moments as they happen, so you can be fully present without thinking about the camera.</p>
-      <p style="margin-top:1rem;">Trust the process. We'll be there to capture all the magic.</p>
-    </div>
+  <section class="screen" id="sc2">
+    <header class="step-header">
+      <span class="step-num">02</span>
+      <h2 class="step-title">Wedding day</h2>
+    </header>
+    <p>The planning is done. Today is yours — just enjoy every moment of it.</p>
+    <p>Our filming approach is entirely candid and natural. We won't put you in awkward situations or ask you to pose. We move quietly through the day capturing real moments as they happen, so you can be fully present without thinking about the camera.</p>
+    <p>Trust the process. We'll be there to capture all the magic.</p>
     <div class="btn-row">
-      <button class="btn-secondary" onclick="go(1)">← Back</button>
-      <button class="btn-primary" onclick="go(3)">Next →</button>
+      <button type="button" class="btn-secondary" onclick="go(1)">← Back</button>
+      <button type="button" class="btn-primary" onclick="go(3)">Next →</button>
     </div>
-  </div>
+  </section>
 
   <!-- Screen 3: Post-wedding -->
-  <div class="screen" id="sc3">
-    <div class="card">
-      <div class="step-header">
-        <div class="step-badge">03</div>
-        <div class="step-title">Post-wedding</div>
-      </div>
-      <p>Filming is done and your footage is safely backed up. Now we get to work.</p>
-      <p style="margin-top:1rem;">Your social preview will be ready within <strong>14 days</strong> of the wedding. We'd love for you to tag us when you share it — <strong>@seaoflovefilmco</strong>.</p>
-      <p style="margin-top:1rem;">Your full films will be completed within <strong>4–6 weeks</strong> and delivered via a private, permanent download link.</p>
-      <p style="margin-top:1rem; font-size:13px; color:#aaa;">Please make sure you save your video files to a local drive once you receive them.</p>
-      <div style="margin-top:1.5rem; padding-top:1.5rem; border-top:1px solid rgba(0,0,0,0.06); font-size:13px; color:#aaa; line-height:1.6;">Before your pre-wedding meeting, we recommend reviewing your contract and familiarising yourself with your package deliverables — this helps us make the most of our time together and ensures everyone is aligned ahead of the day.</div>
-    </div>
+  <section class="screen" id="sc3">
+    <header class="step-header">
+      <span class="step-num">03</span>
+      <h2 class="step-title">Post-wedding</h2>
+    </header>
+    <p>Filming is done and your footage is safely backed up. Now we get to work.</p>
+    <p>Your social preview will be ready within <strong>14 days</strong> of the wedding. We'd love for you to tag us when you share it — <strong>@seaoflovefilmco</strong>.</p>
+    <p>Your full films will be completed within <strong>4–6 weeks</strong> and delivered via a private, permanent download link.</p>
+    <p class="note">Please make sure you save your video files to a local drive once you receive them.</p>
+    <p class="note">Before your pre-wedding meeting, we recommend reviewing your contract and familiarising yourself with your package deliverables — this helps us make the most of our time together and ensures everyone is aligned ahead of the day.</p>
     <div class="btn-row">
-      <button class="btn-secondary" onclick="go(2)">← Back</button>
-      <button class="btn-primary" onclick="go(4)">Next →</button>
+      <button type="button" class="btn-secondary" onclick="go(2)">← Back</button>
+      <button type="button" class="btn-primary" onclick="go(4)">Next →</button>
     </div>
-  </div>
+  </section>
 
   <!-- Screen 4: Music -->
-  <div class="screen" id="sc4">
-    <div class="card">
-      <div class="step-header">
-        <div class="step-badge">🎵</div>
-        <div class="step-title">Music</div>
-      </div>
-      <p>Music sets the emotional tone of your film and plays a huge role in how it feels when you watch it back in 10, 20, 30 years. That's why we use licensed music — it keeps your video online, sounds timeless, and stays personal to you as a couple long after the trends move on.</p>
-      <p style="margin-top:1rem;">We encourage your input on song direction. We've built a dedicated music guide to walk you through the process, explain what's available, and help you find tracks you genuinely love.</p>
-      <a href="https://music.seaoflovefilm.co" target="_blank" class="btn-music">Select your music →</a>
-    </div>
+  <section class="screen" id="sc4">
+    <header class="step-header">
+      <span class="step-num">04</span>
+      <h2 class="step-title">Music</h2>
+    </header>
+    <p>Music sets the emotional tone of your film and plays a huge role in how it feels when you watch it back in 10, 20, 30 years. That's why we use licensed music — it keeps your video online, sounds timeless, and stays personal to you as a couple long after the trends move on.</p>
+    <p>We encourage your input on song direction. We've built a dedicated music guide to walk you through the process, explain what's available, and help you find tracks you genuinely love.</p>
+    <a href="https://music.seaoflovefilm.co" target="_blank" rel="noopener noreferrer" class="btn-inline">Select your music →</a>
     <div class="btn-row">
-      <button class="btn-secondary" onclick="go(3)">← Back</button>
-      <button class="btn-primary" onclick="go(5)">Next →</button>
+      <button type="button" class="btn-secondary" onclick="go(3)">← Back</button>
+      <button type="button" class="btn-primary" onclick="go(5)">Next →</button>
     </div>
-  </div>
+  </section>
 
   <!-- Screen 5: Revisions -->
-  <div class="screen" id="sc5">
-    <span class="section-label">Revisions</span>
-    <h2>One round, included.</h2>
-    <div class="card">
-      <p>Every package includes one complimentary round of feedback on your highlight film. Once you've watched it, let us know your thoughts and we'll work with you to make sure it meets your expectations.</p>
-      <p style="margin-top:1rem;">Revisions are provided within the scope of our offering, as outlined in your agreement. We're committed to making sure you love the final result.</p>
-    </div>
+  <section class="screen" id="sc5">
+    <span class="eyebrow">Revisions</span>
+    <h2 class="screen-heading">One round, <em>included.</em></h2>
+    <p>Every package includes one complimentary round of feedback on your highlight film. Once you've watched it, let us know your thoughts and we'll work with you to make sure it meets your expectations.</p>
+    <p>Revisions are provided within the scope of our offering, as outlined in your agreement. We're committed to making sure you love the final result.</p>
     <div class="btn-row">
-      <button class="btn-secondary" onclick="go(4)">← Back</button>
-      <button class="btn-primary" onclick="go(6)">Next →</button>
+      <button type="button" class="btn-secondary" onclick="go(4)">← Back</button>
+      <button type="button" class="btn-primary" onclick="go(6)">Next →</button>
     </div>
-  </div>
+  </section>
 
   <!-- Screen 6: Contact -->
-  <div class="screen" id="sc6">
-    <span class="section-label">Get in touch</span>
-    <h2>We're here if you need us.</h2>
-    <div class="card" style="margin-bottom:1rem;">
-      <div class="contact-row"><span class="contact-tag">P</span><a href="tel:+61400567603" class="contact-val">+61 400 567 603</a></div>
-      <div class="contact-row"><span class="contact-tag">E</span><a href="mailto:nathan@seaoflovefilm.co" class="contact-val">nathan@seaoflovefilm.co</a></div>
-      <div class="contact-row"><span class="contact-tag">IG</span><a href="https://instagram.com/seaoflovefilmco" target="_blank" class="contact-val">@seaoflovefilmco</a></div>
-      <div class="contact-row"><span class="contact-tag">W</span><a href="https://www.seaoflovefilm.co" target="_blank" class="contact-val">seaoflovefilm.co</a></div>
-    </div>
-    <div class="card" style="margin-bottom:1rem;">
-      <div class="step-header" style="margin-bottom:0.75rem;">
-        <div class="step-badge">📸</div>
-        <div class="step-title">Follow us on Instagram</div>
+  <section class="screen" id="sc6">
+    <span class="eyebrow">Get in touch</span>
+    <h2 class="screen-heading">We're here if you <em>need us.</em></h2>
+
+    <div class="contact-rows">
+      <div class="contact-row">
+        <span class="contact-tag">P</span>
+        <a href="tel:+61400567603" class="contact-val">+61 400 567 603</a>
       </div>
-      <p>We love sharing the work we create with our couples. Give us a follow at <a href="https://instagram.com/seaoflovefilmco" target="_blank" style="color:#111;font-weight:500;">@seaoflovefilmco</a> — when your films are ready, we'd love to collaborate on a post together and share your story with our community.</p>
+      <div class="contact-row">
+        <span class="contact-tag">E</span>
+        <a href="mailto:nathan@seaoflovefilm.co" class="contact-val">nathan@seaoflovefilm.co</a>
+      </div>
+      <div class="contact-row">
+        <span class="contact-tag">IG</span>
+        <a href="https://instagram.com/seaoflovefilmco" target="_blank" rel="noopener noreferrer" class="contact-val">@seaoflovefilmco</a>
+      </div>
+      <div class="contact-row">
+        <span class="contact-tag">W</span>
+        <a href="https://www.seaoflovefilm.co" target="_blank" rel="noopener noreferrer" class="contact-val">seaoflovefilm.co</a>
+      </div>
     </div>
-    <div class="card">
-      <p style="margin-bottom:1.25rem;">Have a question or want to talk something through before the day? Book a call directly — we're always happy to chat.</p>
-      <a href="https://calendly.com/nathan-sol/30min" target="_blank" class="btn-music">Book a call →</a>
+
+    <div class="subsection">
+      <span class="eyebrow">Instagram</span>
+      <h3 class="subsection-heading">Follow along.</h3>
+      <p>We love sharing the work we create with our couples. Give us a follow at <a href="https://instagram.com/seaoflovefilmco" target="_blank" rel="noopener noreferrer">@seaoflovefilmco</a> — when your films are ready, we'd love to collaborate on a post together and share your story with our community.</p>
     </div>
+
+    <div class="subsection">
+      <span class="eyebrow">Book a call</span>
+      <h3 class="subsection-heading">Anything else on your mind?</h3>
+      <p>Have a question or want to talk something through before the day? Book a call directly — we're always happy to chat.</p>
+      <a href="https://calendly.com/nathan-sol/30min" target="_blank" rel="noopener noreferrer" class="btn-inline">Book a call →</a>
+    </div>
+
     <div class="btn-row">
-      <button class="btn-secondary" onclick="go(5)">← Back</button>
+      <button type="button" class="btn-secondary" onclick="go(5)">← Back</button>
     </div>
-  </div>
+  </section>
 
 </div>
 
 <script>
-function go(n) {
-  for(var i=0;i<7;i++){
-    document.getElementById('sc'+i).className='screen'+(i===n?' visible':'');
-    var st=document.getElementById('st'+i);
-    if(i<n) st.className='progress-step done';
-    else if(i===n) st.className='progress-step active';
-    else st.className='progress-step';
+  /* ============================================================
+     Step navigation
+     Toggles `.visible` on screens and `.active`/`.done` on the
+     progress bar buttons. Aria-current updates for the active
+     step so screen readers track the navigation. Smooth-scroll
+     to top on every step change.
+     ============================================================ */
+  function go(n) {
+    for (var i = 0; i < 7; i++) {
+      var sc = document.getElementById('sc' + i);
+      var st = document.getElementById('st' + i);
+      sc.className = 'screen' + (i === n ? ' visible' : '');
+      if (i < n) {
+        st.className = 'progress-step done';
+        st.removeAttribute('aria-current');
+      } else if (i === n) {
+        st.className = 'progress-step active';
+        st.setAttribute('aria-current', 'page');
+      } else {
+        st.className = 'progress-step';
+        st.removeAttribute('aria-current');
+      }
+    }
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }
-  window.scrollTo({top:0,behavior:'smooth'});
-}
 </script>
 </body>
 </html>
