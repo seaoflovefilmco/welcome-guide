@@ -103,19 +103,17 @@
   /* ============================================================
      Progress bar — minimal underline-tab pattern.
      ============================================================ */
-  .progress-bar {
+.progress-bar {
     display: flex;
+    flex-wrap: wrap;
     margin: 0 0 4rem;
     border-bottom: 1px solid var(--rule);
-    overflow-x: auto;
-    scrollbar-width: none;
-    -webkit-overflow-scrolling: touch;
   }
   .progress-bar::-webkit-scrollbar {
     display: none;
   }
   .progress-step {
-    flex: 1 0 auto;
+    flex: 0 0 auto;
     padding: 14px 12px;
     border: none;
     border-bottom: 1px solid transparent;
