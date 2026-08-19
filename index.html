@@ -420,6 +420,33 @@
       padding: 11px 0;
       letter-spacing: 0.10em;
     }
+    /* Labels overflow a single line at this width, so collapse each
+       step to a small dot. font-size: 0 hides the text node visually
+       while keeping it in the accessibility tree (no span in the
+       markup to target instead). State reads through dot colour only,
+       reusing the same black/mid/rule-strong tokens as the text
+       version's active/done/upcoming hierarchy. */
+    .progress-bar {
+      justify-content: center;
+      gap: 10px;
+    }
+    .progress-step {
+      font-size: 0;
+      width: 12px;
+      height: 12px;
+      padding: 0;
+      border-radius: 50%;
+      border-bottom: none;
+      margin-bottom: 0;
+      background: var(--rule-strong);
+    }
+    .progress-step.done {
+      background: var(--mid);
+    }
+    .progress-step.active {
+      background: var(--black);
+      border-bottom-color: transparent;
+    }
     .step-header {
       flex-direction: column;
       align-items: flex-start;
